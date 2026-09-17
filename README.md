@@ -218,7 +218,7 @@ Image Features    Text Features    Audio Features  Time-series Features
 
 ### Features Union
 
-`Features Union`은 이 repository에서 사용하는 multimodal architecture concept입니다. 구현에서는 아래와 같은 structured container로 표현할 수 있습니다.
+`Features Union`은 이 repository에서 사용하는 multimodal architecture concept입니다. Features Union에서는 각 features의 독립성을 유지하고 개별적으로 식별·접근할 수 있도록 구성합니다. 예를 들어 Python에서는 아래와 같이 `dictionary` 객체를 사용하여 표현할 수 있습니다.
 
 ```python
 features_union = {
@@ -229,7 +229,7 @@ features_union = {
 }
 ```
 
-`dict` 자체가 새로운 ML algorithm이라는 의미는 아닙니다. 핵심 design constraint는 각 modality-specific features가 **독립적으로 식별되고 접근 가능한 상태를 유지하는 것**입니다.
+Python `dictionary` 객체 자체가 새로운 ML algorithm이라는 의미는 아닙니다. 핵심 design constraint는 각 modality-specific features가 **독립적으로 식별되고 접근 가능한 상태를 유지하는 것**입니다.
 
 ```text
 Features Union
@@ -490,7 +490,7 @@ Prediction
     Training          Evaluation         Diagnostics
 ```
 
-`deep-learning-core`의 training runner는 single Tensor뿐 아니라 `dict`, `tuple`, `list`와 같은 nested multimodal input container를 device로 이동할 수 있도록 구성할 수 있습니다.
+`deep-learning-core`의 training runner는 single Tensor뿐 아니라 `dictionary`, `tuple`, `list`와 같은 nested multimodal input data structures를 device로 이동할 수 있도록 구성할 수 있습니다.
 
 예시는 아래와 같습니다.
 
