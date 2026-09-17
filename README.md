@@ -1,4 +1,5 @@
 # infinite-union
+(train roop refactoring 과 multi modal 공부를 병행하다가)
 
 `infinite-union`은 서로 다른 modality에서 추출된 **modality-specific features의 identity와 independence를 유지하면서**, 필요한 interaction을 명시적으로 구성하고 새로운 modality 또는 model component를 **확장할 수 있도록 설계하는 multimodal architecture 관점**입니다.
 
