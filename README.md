@@ -1,8 +1,10 @@
 # infinite-union
 
-`infinite-union`은 서로 다른 modality에서 추출된 **modality-specific features의 identity와 independence를 유지하면서**, 필요한 interaction을 명시적으로 구성하고 새로운 modality 또는 model component를 확장할 수 있도록 설계하는 multimodal architecture project이다.
+`infinite-union`은 **multimodal architecture project**이다.
 
-> **Infinite Union**은 표준 ML/DL 용어가 아니라 이 프로젝트에서 사용하는 architecture design concept이다.
+이 프로젝트는 multimodal architecture 관점에서 서로 다른 modality에서 추출된 **modality-specific features의 identity와 independence를 유지하면서**, 필요한 interaction을 명시적으로 구성하고 새로운 modality 또는 model component를 확장할 수 있는 architecture를 설계한다.
+
+> **Infinite Union**은 표준 ML/DL 용어가 아니라 이 프로젝트에서 사용하는 multimodal architecture design concept이다.
 
 ---
 
@@ -121,13 +123,13 @@ Multimodal model에서 여러 modality representation을 하나의 tensor 또는
 
 이러한 문제는 모든 multimodal architecture에 항상 발생하는 것은 아니며 architecture와 implementation에 따라 달라진다.
 
-Infinite Union은 이러한 설계 문제를 줄이기 위해 **feature management와 cross-modal interaction의 책임을 분리**하는 것을 목표로 한다.
+Infinite Union은 이러한 설계 문제를 줄이기 위해 **feature management와 cross-modal interaction의 책임을 분리**하는 multimodal architecture를 지향한다.
 
 ---
 
 ## 7. Infinite Union
 
-Infinite Union의 핵심은 서로 다른 modality-specific features를 하나의 representation으로 즉시 변환하는 것이 아니라, **각 features의 identity를 유지한 상태로 함께 관리하는 것**이다.
+Infinite Union의 핵심은 서로 다른 modality-specific features를 하나의 representation으로 즉시 변환하는 것이 아니라, **각 features의 identity를 유지한 상태로 함께 관리하는 multimodal architecture**를 구성하는 것이다.
 
 ```text
 Independent Inputs
@@ -154,7 +156,7 @@ Image Features    Text Features    Audio Features  Time-series Features
 
 ### Features Union
 
-`Features Union`은 이 프로젝트에서 사용하는 architecture concept이다. 구현에서는 다음과 같은 structured container로 표현할 수 있다.
+`Features Union`은 이 프로젝트에서 사용하는 multimodal architecture concept이다. 구현에서는 다음과 같은 structured container로 표현할 수 있다.
 
 ```python
 features_union = {
@@ -197,7 +199,7 @@ Features Union
 
 새로운 modality를 추가할 때 기존 modality-specific features를 변경하는 대신 새로운 encoder와 features를 독립적으로 추가하는 방향을 지향한다.
 
-실제 확장 가능성은 downstream interaction interface, dimension compatibility, training data, compute resource 등의 영향을 받으므로 `Infinite`는 물리적으로 무제한이라는 의미가 아니라 **확장 가능한 architecture principle**을 나타낸다.
+실제 확장 가능성은 downstream interaction interface, dimension compatibility, training data, compute resource 등의 영향을 받으므로 `Infinite`는 물리적으로 무제한이라는 의미가 아니라 **확장 가능한 multimodal architecture principle**을 나타낸다.
 
 ---
 
@@ -355,7 +357,7 @@ Time-series Encoder
 
 ## 12. Architecture Goal
 
-Infinite Union은 다음 구조를 지향한다.
+Infinite Union은 multimodal architecture 관점에서 다음 구조를 지향한다.
 
 ```text
 Modality-specific Components
@@ -380,7 +382,7 @@ Interaction
 Prediction
 ```
 
-핵심은 **features management와 relationship computation을 분리하는 것**이다.
+핵심은 **features management와 cross-modal relationship computation을 분리하는 것**이다.
 
 ---
 
@@ -408,38 +410,54 @@ Prediction
 
 ## 14. Relationship with deep-learning-core
 
-`deep-learning-core`는 reusable PyTorch training infrastructure를 담당하고, `infinite-union`은 modality-specific features와 multimodal interaction을 구성하는 architecture layer를 담당하는 방향으로 분리한다.
+`deep-learning-core`는 reusable PyTorch training infrastructure를 담당하고, `infinite-union`은 **multimodal architecture**를 구성하는 project로서 modality-specific features와 cross-modal interaction의 구조를 담당한다.
 
 ```text
-infinite-union
-│
-├── Modality-specific Encoders
-├── Features Union
-├── Interaction
-├── Selection
-└── Prediction
-        │
-        ↓
-deep-learning-core
-├── Training
-├── Evaluation
-├── Device Management
-├── Checkpointing
-└── Diagnostics
+                    infinite-union
+                          │
+             Multimodal Architecture
+                          │
+       ┌──────────────────┼──────────────────┐
+       ↓                  ↓                  ↓
+    Encoders         Features Union      Interaction
+       │                                      │
+       └──────────────────┬───────────────────┘
+                          ↓
+                   deep-learning-core
+                          │
+       ┌──────────────────┼──────────────────┐
+       ↓                  ↓                  ↓
+    Training          Evaluation         Diagnostics
 ```
 
-이 분리는 model-specific architecture와 reusable training infrastructure의 responsibility를 분리하기 위한 것이다.
+`deep-learning-core`의 training runner는 single Tensor뿐 아니라 `dict`, `tuple`, `list`와 같은 nested multimodal input container를 device로 이동할 수 있도록 구성할 수 있다.
+
+예:
+
+```python
+x_batch = {
+    "image": image_tensor,
+    "text": text_tensor,
+    "time_series": time_series_tensor,
+}
+```
+
+이를 통해 `infinite-union`의 multimodal architecture와 reusable training infrastructure의 책임을 분리한다.
 
 ---
 
 ## 15. Vision
 
-Infinite Union의 목표는 여러 modality를 단순히 하나의 representation으로 만드는 것이 아니다.
+`infinite-union`의 목표는 여러 modality를 단순히 하나의 representation으로 만드는 것 자체가 아니다.
 
-각 modality-specific features를 독립적으로 식별하고 분석할 수 있는 상태로 유지하면서, task가 필요로 하는 관계만 명시적인 Interaction mechanism을 통해 계산하는 architecture를 구축하는 것이다.
+**Multimodal architecture 관점에서 modality-specific features의 independence와 identity를 유지하면서 필요한 cross-modal interaction을 명시적으로 구성하고, 새로운 modality와 model component를 확장할 수 있는 architecture를 설계하고 검증하는 것**을 목표로 한다.
 
 ```text
-Independent Features
+Independent Modalities
+        ↓
+Modality-specific Encoders
+        ↓
+Modality-specific Features
         ↓
 Features Union
         ↓
@@ -447,5 +465,3 @@ Explicit Interaction
         ↓
 Prediction
 ```
-
-이를 기반으로 modality 추가, encoder 교체, ablation study, model diagnostics 및 새로운 interaction mechanism 실험을 일관된 architecture 안에서 수행할 수 있도록 하는 것을 목표로 한다.
