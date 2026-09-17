@@ -1,6 +1,6 @@
 # infinite-union
 
-(Developed while studying train-loop refactoring and multimodal learning in parallel.)
+(Developed while train-loop refactoring and studying multimodal learning in parallel.)
 
 `infinite-union` is a multimodal architecture perspective designed to **preserve the identity and independence of modality-specific features** extracted from different modalities, explicitly construct required interactions, and **extend the system with new modalities or model components**.
 
