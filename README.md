@@ -4,7 +4,7 @@
 
 Infinite Union은 multimodal fusion에서 발생할 수 있는 modality-specific feature identity 저하, component 간 결합도 증가, 확장성 및 observability 저하와 같은 **구조적 한계를 극복하기 위해 제안하는 multimodal architecture 관점**입니다.
 
-> **Infinite Union**은 표준 ML/DL 용어가 아니라 이 repository에서 사용하는 multimodal architecture design concept입니다.
+> **Infinite Union**은 표준 ML/DL 용어가 아니라 이 repository에서 제안하는 **modeling methodology**로, 각각의 features가 독립성을 유지하면서 서로 연결되고 상호작용하며, 새로운 features와 model components로 지속적으로 확장할 수 있도록 모델을 구성하는 방법입니다.
 
 ---
 
