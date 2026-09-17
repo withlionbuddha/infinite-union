@@ -1,8 +1,8 @@
 # infinite-union
 
-`infinite-union`은 **multimodal architecture project**이다.
+`infinite-union`은 서로 다른 modality에서 추출된 **modality-specific features의 identity와 independence를 유지하면서**, 필요한 interaction을 명시적으로 구성하고 새로운 modality 또는 model component를 **확장할 수 있도록 설계하는 multimodal architecture 관점**이다.
 
-이 프로젝트는 multimodal architecture 관점에서 서로 다른 modality에서 추출된 **modality-specific features의 identity와 independence를 유지하면서**, 필요한 interaction을 명시적으로 구성하고 새로운 modality 또는 model component를 확장할 수 있는 architecture를 설계한다.
+Infinite Union은 multimodal fusion에서 발생할 수 있는 modality-specific feature identity 저하, component 간 결합도 증가, 확장성 및 observability 저하와 같은 **구조적 한계를 극복하기 위해 제안하는 multimodal architecture 관점**이다.
 
 > **Infinite Union**은 표준 ML/DL 용어가 아니라 이 프로젝트에서 사용하는 multimodal architecture design concept이다.
 
