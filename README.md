@@ -21,7 +21,7 @@ Deep Learning은 입력과 출력 사이의 관계를 고정된 규칙만으로 
 - Anomaly detection
 - Multimodal learning
 
-반대로 명확한 business rule, 단순 lookup, sorting, deterministic calculation처럼 입력과 출력 관계를 규칙으로 정확하게 정의할 수 있는 문제는 일반적인 software algorithm이나 rule-based system이 더 단순하고 검증하기 쉬울 수 있습니다.
+반면에, 명확한 business rule, 단순 lookup, sorting, deterministic calculation처럼 입력과 출력 관계를 규칙으로 정확하게 정의할 수 있는 문제는 일반적인 software algorithm이나 rule-based system이 더 단순하고 검증하기 쉬울 수 있습니다. (AI가 만사가 아니라고! 반도체 값만 올리는 주범)
 
 AI 적용 여부는 data availability, evaluation metric, inference cost, explainability, maintenance cost를 기준으로 판단하고 결정해야 합니다.
 
